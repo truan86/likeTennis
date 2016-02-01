@@ -1,0 +1,24 @@
+<div>
+    <h1>Hi, are you ready?</h1>
+
+    <button ui-sref="start" class="btn">Start a new game</button>
+
+    <hr>
+    <h1>Statistics</h1>
+    <section ng-repeat="statistic in  main.statistic track by $index ">
+
+        <h2>Player name :{{ statistic.name }}</h2>
+        <p>matches : {{statistic.matches}}</p>
+        <p>Win :{{statistic.wins}}</p>
+        <p>percent : {{ statistic.wins * 100 /  statistic.matches +"%"}}</p>
+    </section>
+    <hr>
+    <h1>Matches</h1>
+    <div ng-repeat="game in main.games track by $index">
+
+        <h2>{{ game.name1 }} || {{ game.name2 }}</h2>
+        <p>Score - {{ game.score1 }}:{{ game.score2 }}<br>{{ game.time | date:'EEEE - HH:mm:ss' }}</p>
+    </div>
+
+
+</div>
