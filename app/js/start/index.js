@@ -14,6 +14,13 @@ class StartController {
         this.$state.go('main');
     }
 
+    getAllOpponent() {
+        let opponent = [];
+        this.GameService.statistic.forEach(function (item) {
+            opponent.push(item.name);
+        });
+        return opponent;
+    }
 }
 
 export default StartController;
