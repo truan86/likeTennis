@@ -5,18 +5,32 @@
 
     <hr>
     <h1>Statistics</h1>
-    <section ng-repeat="statistic in  main.statistic track by $index ">
+    <section class="col-lg-4" ng-repeat="statistic in  main.statistic track by $index ">
 
-        <h2>Player name :{{ statistic.name }}</h2>
+        <h2>{{ statistic.name }}</h2>
         <p>matches : {{statistic.matches}}</p>
         <p>Win :{{statistic.wins}}</p>
-        <p>percent : {{ statistic.wins * 100 /  statistic.matches +"%"}}</p>
+        <p>percent of win :
+            <uib-progressbar class="progress-striped" value="(statistic.wins * 100 / statistic.matches) |number:0"
+                             max="100">
+                {{ (statistic.wins * 100 / statistic.matches) |number:0}}%
+            </uib-progressbar>
+        </p>
+        <hr>
     </section>
+    <div class="row"></div>
     <hr>
     <h1>Matches</h1>
-    <div ng-repeat="game in main.games track by $index">
+    <section class="col-lg-6" ng-repeat="game in main.filter10 track by $index">
 
         <h2>{{ game.name1 }} || {{ game.name2 }}</h2>
         <p>Score - {{ game.score1 }}:{{ game.score2 }}<br>{{ game.time | date:'EEEE - HH:mm:ss' }}</p>
-    </div>
+        <hr>
+    </section>
+    <div class="row"></div>
+    <button class="btn btn-warning" ng-disabled=" main.currentPage == 1" ng-click="main.previousPage()">Previous page
+    </button>
+    <button class="btn btn-success" ng-disabled="main.currentPage > main.games.length / main.numPerPage "
+            ng-click="main.nextPage()">Next page
+    </button>
 </div>

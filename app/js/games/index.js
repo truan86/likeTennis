@@ -23,6 +23,7 @@ class GameService {
         localStorage.games = JSON.stringify(this.games);
     }
 
+
     statistics() {
         let players = [];
         this.games.forEach(function (game) {
