@@ -2,30 +2,19 @@ class MainController {
     constructor(GameService) {
         this.games = GameService.games;
         this.statistic = GameService.statistic;
+        this.filter10 = this.games.slice(-10);
+        this.showEdit = {};
+        for (let i = 0; i < this.games.length; i++) {
+            this.showEdit[i] = false;
+        }
+    }
 
-        this.currentPage = 1;
-        this.numPerPage = 10;
-        this.filterStart = ((this.currentPage - 1) * this.numPerPage);
-        this.filterEnd = this.filterStart + this.numPerPage;
-        this.filter10 = this.games.slice(this.filterStart, this.filterEnd);
+    showEditfn(id) {
+        (this.showEdit[id] == false) ? this.showEdit[id] = true : this.showEdit[id] = false;
+    }
 
-
-
-        this.previousPage = function () {
-            this.currentPage -= 1;
-            this.filterStart = ((this.currentPage - 1) * this.numPerPage);
-            this.filterEnd = this.filterStart + this.numPerPage;
-            this.filter10 = this.games.slice(this.filterStart, this.filterEnd);
-        };
-        this.nextPage = function () {
-            this.currentPage += 1;
-            this.filterStart = ((this.currentPage - 1) * this.numPerPage);
-            this.filterEnd = this.filterStart + this.numPerPage;
-            this.filter10 = this.games.slice(this.filterStart, this.filterEnd);
-
-        };
-
-        this.filter10 = this.games.slice(this.filterStart, this.filterEnd);
+    isWin(obj) {
+        return obj.score1 > obj.score2;
     }
 }
 

@@ -6,17 +6,27 @@ import angularUiBootstrap from 'angular-ui-bootstrap';
 
 import mainTemplate from '../partials/main/index.html';
 import startTemplate from '../partials/start/index.html';
+import resultsTemplate from '../partials/results/index.html';
+
 
 import GameService from '../js/games/index';
 
 import MainController from '../js/main/index';
 import StartController from '../js/start/index';
+import ResultsController from '../js/results/index';
 
 
 angular.module('app', [angularUiRouter, angularUiBootstrap])
     .controller('MainController', MainController)
     .controller('StartController', StartController)
+    .controller('ResultsController',ResultsController)
+
     .service('GameService', GameService)
+    .filter('reverse', function () {
+        return function (items) {
+            return items.slice().reverse();
+        };
+    })
 
     .config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/');
@@ -31,5 +41,11 @@ angular.module('app', [angularUiRouter, angularUiBootstrap])
                 url: '/start',
                 template: startTemplate,
                 controller: 'StartController as start'
-            });
+            })
+            .state('results', {
+                url: '/results',
+                template: resultsTemplate,
+                controller: 'ResultsController as result'
+            })
+
     });
