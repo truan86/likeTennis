@@ -21,30 +21,26 @@
     <h1>Last 10 matches</h1>
 
 </div>
-<section class="col-lg-6" ng-repeat="game in main.filter10|reverse track by $index  ">
+<section class="col-lg-6" ng-repeat="game in main.games|reverse|limitTo:10 track by $index  ">
     <h2><span ng-class="{'win': main.isWin(game), 'lost': !main.isWin(game)}">{{ game.name1 }} </span>|| <span
             ng-class="{'lost': main.isWin(game), 'win': !main.isWin(game)}"> {{ game.name2 }}</span></h2>
-    <p>Score - {{ game.score1 }}:{{ game.score2 }}<br>{{ game.time | date:'EEEE - HH:mm:ss' }}</p>
+    <p>Score - {{ game.score1 }}:{{ game.score2 }}<br>{{ game.time | date:'dd MMMM yyyy' }}</p>
 
-    <form ng-show="main.showEdit[$index]" ng-submit="start.save()">
-        <label class="form-group">My Name: <input class="form-control" type="text" ng-model="start.name"
-                                                  uib-typeahead="state for state in start.getAllOpponent() | filter:$viewValue | limitTo:8"></label>
-        <label class="form-group">Who I played: <input class="form-control" type="text" ng-model="start.hisName"
-                                                       uib-typeahead="state for state in start.getAllOpponent() | filter:$viewValue | limitTo:8"></label>
+    <form ng-show="main.showEdit[$index]" ng-submit="main.saveEdit($index)">
+        <label class="form-group">My Name: <input class="form-control" type="text" ng-model="game.name1"></label>
+        <label class="form-group">Who I played: <input class="form-control" type="text" ng-model="game.name2"></label>
 
-        <label class="form-group">{{ start.name }} points: <input class="form-control"
-                                                                  type="number"
-                                                                  ng-model="start.points"
+        <label class="form-group">{{ start.name }} points: <input class="form-control" type="number"
+                                                                  ng-model="game.score1"
                                                                   max="21" min="0"></label>
-        <label class="form-group">{{ start.hisName }} points: <input class="form-control"
-                                                                     type="number"
-                                                                     ng-model="start.hisPoints"
+        <label class="form-group">{{ start.hisName }} points: <input class="form-control" type="number"
+                                                                     ng-model="game.score2"
                                                                      max="21" min="0"></label>
-        <input class="form-group" type="date" ng-model="game.time" ng-model="game.time"/>
+        <input class="form-group" type="date" ng-model="game.time"/>
 
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
-    <button ng-click=" main.showEditfn($index)" class="btn btn-success">Edit</button>
+    <button ng-click=" main.showEditfn($index)" class="btn btn-primary">Edit</button>
     <hr>
 
 </section>

@@ -20,7 +20,6 @@ angular.module('app', [angularUiRouter, angularUiBootstrap])
     .controller('MainController', MainController)
     .controller('StartController', StartController)
     .controller('ResultsController',ResultsController)
-
     .service('GameService', GameService)
     .filter('reverse', function () {
         return function (items) {
