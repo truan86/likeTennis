@@ -2,6 +2,7 @@ import 'babel-polyfill';
 import angular from 'angular';
 import angularUiRouter from 'angular-ui-router';
 import angularUiBootstrap from 'angular-ui-bootstrap';
+import angularMoment from 'angular-moment';
 
 
 import mainTemplate from '../partials/main/index.html';
@@ -16,10 +17,10 @@ import StartController from '../js/start/index';
 import ResultsController from '../js/results/index';
 
 
-angular.module('app', [angularUiRouter, angularUiBootstrap])
+angular.module('app', [angularUiRouter, angularUiBootstrap, angularMoment])
     .controller('MainController', MainController)
     .controller('StartController', StartController)
-    .controller('ResultsController',ResultsController)
+    .controller('ResultsController', ResultsController)
     .service('GameService', GameService)
     .filter('reverse', function () {
         return function (items) {
